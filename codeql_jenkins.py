@@ -4,12 +4,11 @@ import tarfile
 import sys
 import subprocess
 import os
-import shutil
 
-CODEQL_BUNDLE_URL = "https://github.com/github/codeql-action/releases/download/codeql-bundle-20230304/codeql-bundle-win64.tar.gz"
+CODEQL_BUNDLE_URL = f"https://github.com/github/codeql-action/releases/download/codeql-bundle-20230304/codeql-bundle-" + ("win64" if os.name == "nt" else "linux64") + ".tar.gz"
 CODEQL_TAR_FILENAME = "codeql.tar.gz"
 CODEQL_PATH = "codeql"
-CODEQL_PATH_EXECUTABLE = os.path.join(CODEQL_PATH, "codeql.exe")
+CODEQL_PATH_EXECUTABLE = os.path.join(CODEQL_PATH, "codeql.cmd")
 
 logging.getLogger().setLevel(level=logging.INFO)
 
