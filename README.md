@@ -24,3 +24,5 @@ INFO:root:Wrote sarif to codeql-results.sarif
 ```
 
 Reach out to @slemos on Slack if help is required.
+
+This repository is provided as-is and isn't bound to Malwarebytes' SLA.
