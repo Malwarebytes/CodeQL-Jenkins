@@ -7,7 +7,7 @@ The script can download CodeQL if it's not found. By default it looks for codeql
 For example, for this sample C# app:
 
 ```powershell
-python codeql_jenkins.py "./app" "dotnet clean && dotnet build" "codeql-db-app" "csharp" "codeql/csharp-all" "codeql-results.sarif" 
+python codeql_jenkins.py "./app" "dotnet clean && dotnet build" "codeql-db-app" "csharp" "codeql/csharp-queries" "codeql-results.sarif" 
 ```
 
 ```

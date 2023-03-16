@@ -104,7 +104,7 @@ if __name__ == "__main__":
             f"""Usage: codeql_jenkins.py "source_root" "build_command" "codeql_db_name" "language" "queries" "sarif-output" """
         )
         logging.info(
-            f"""Example: python codeql_jenkins.py "./app" "dotnet build" "codeql-db-app" "csharp" "codeql/csharp-all" "codeql-results.sarif" """
+            f"""Example: python codeql_jenkins.py "./app" "dotnet build" "codeql-db-app" "csharp" "codeql/csharp-queries" "codeql-results.sarif" """
         )
         sys.exit(-1)
     (
