@@ -3,7 +3,7 @@ import urllib.request
 import sys
 import subprocess
 import os
-import zipfile
+import tarfile
 
 logging.getLogger().setLevel(level=logging.INFO)
 
@@ -14,11 +14,11 @@ class Scan:
     IS_WINDOWS = os.name == "nt"
     THREADS = 8
     CODEQL_BUNDLE_URL = (
-        f"https://github.com/github/codeql-cli-binaries/releases/download/v2.12.4/codeql-"
+        f"https://github.com/github/codeql-action/releases/download/codeql-bundle-20230304/codeql-bundle-"
         + ("win64" if IS_WINDOWS else "linux64")
-        + ".zip"
+        + ".tar.gz"
     )
-    CODEQL_ZIP_FILENAME = "codeql.zip"
+    CODEQL_TAR_FILENAME = "codeql.tar.gz"
 
     def __init__(self):
         self.DEFAULT_CODEQL_PATH = "codeql"
@@ -35,10 +35,10 @@ class Scan:
         if not os.path.exists(codeql_path):
             logging.info(f"Didn't find CodeQL in {codeql_path}")
             logging.info("Dowloading codeql")
-            urllib.request.urlretrieve(Scan.CODEQL_BUNDLE_URL, Scan.CODEQL_ZIP_FILENAME)
+            urllib.request.urlretrieve(Scan.CODEQL_BUNDLE_URL, Scan.CODEQL_TAR_FILENAME)
             logging.info("Extracting codeql")
-            with zipfile.ZipFile(Scan.CODEQL_ZIP_FILENAME, "r") as zip_ref:
-                zip_ref.extractall()
+            with tarfile.open(Scan.CODEQL_TAR_FILENAME, "r") as tar:
+                tar.extractall()
             codeql_path = self.DEFAULT_CODEQL_PATH
         self.codeql_path_executable = os.path.abspath(
             os.path.join(codeql_path, "codeql.cmd")
@@ -62,7 +62,6 @@ class Scan:
                 build_command,
                 "--source-root",
                 source_root,
-                "--overwrite",
             ]
         )
 
@@ -105,7 +104,7 @@ if __name__ == "__main__":
             f"""Usage: codeql_jenkins.py "source_root" "build_command" "codeql_db_name" "language" "queries" "sarif-output" """
         )
         logging.info(
-            f"""Example: python codeql_jenkins.py "./app" "dotnet build" "codeql-db-app" "csharp" "codeql/csharp" "codeql-results.sarif" """
+            f"""Example: python codeql_jenkins.py "./app" "dotnet build" "codeql-db-app" "csharp" "codeql/csharp-all" "codeql-results.sarif" """
         )
         sys.exit(-1)
     (
