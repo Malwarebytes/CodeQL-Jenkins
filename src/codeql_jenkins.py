@@ -1,5 +1,4 @@
 import logging
-import urllib
 import sys
 import subprocess
 import os
@@ -35,7 +34,12 @@ class Scan:
         if not os.path.exists(codeql_path):
             logging.info("Didn't find CodeQL in {}".format(codeql_path))
             logging.info("Dowloading codeql")
-            urllib.urlretrieve(Scan.CODEQL_BUNDLE_URL, Scan.CODEQL_TAR_FILENAME)
+            if sys.version_info[0] <= 2:
+                import urllib
+                urllib.urlretrieve(Scan.CODEQL_BUNDLE_URL, Scan.CODEQL_TAR_FILENAME)
+            elif sys.version_info[0] <= 3:
+                import urllib.request
+                urllib.request.urlretrieve(Scan.CODEQL_BUNDLE_URL, Scan.CODEQL_TAR_FILENAME)
             logging.info("Extracting codeql")
             with tarfile.open(Scan.CODEQL_TAR_FILENAME, "r") as tar:
                 tar.extractall()
