@@ -1,4 +1,4 @@
-# codql_jenkins
+# codeql_jenkins
  
 A helper python script to integrate CodeQL into Jenkins pipelines and output a sarif file.
 
