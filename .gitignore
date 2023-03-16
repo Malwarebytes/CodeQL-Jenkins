@@ -152,6 +152,7 @@ cython_debug/
 #.idea/
 
 *.zip
+*.tar.gz
 bin/
 obj/
 codeql/
