@@ -2,7 +2,7 @@
  
 A helper python script to integrate CodeQL into Jenkins pipelines and output a sarif file.
 
-The script can download CodeQL if it's not found. By default it looks for codeql `./codeql`, `~/codeql` and `C:/Program Files/codeql`.
+The script can download CodeQL if it's not found. By default it looks for codeql `./codeql`, `~/codeql` and `C:/Program Files/codeql`. It runs on both Python 2.7 and 3.x.
 
 For example, for a sample C# app located in `C:/app`:
 
