@@ -22,7 +22,16 @@ class Scan:
     def __init__(self):
         self.DEFAULT_CODEQL_PATH = "codeql"
 
-    def retrieve_codeql(self):
+    def install_corepack(self, corepack_path):
+        logging.info("Enabling drivers corepack")
+        if not os.path.exists(corepack_path):
+            logging.error("Windows Driver Developer Supplemental Tools not found")
+            logging.error("Please use git submodule update --init --recursive")
+            sys.exit(-1)
+        subprocess.call([self.codeql_path_executable, "pack", "install", corepack_path])
+        logging.info("Windows Driver Developer Supplemental Tools installed")
+
+    def retrieve_codeql(self, extra_corepacks=[]):
         logging.info("Looking for CodeQL")
         codeql_path = self.DEFAULT_CODEQL_PATH
         if not os.path.exists(self.DEFAULT_CODEQL_PATH):
@@ -52,6 +61,11 @@ class Scan:
             os.path.join(codeql_path, "codeql.cmd")
         )
         logging.info("Using CodeQL from {}".format(self.codeql_path_executable))
+        if "WINDOWS_DRIVER" in extra_corepacks:
+            driver_corepack_path = os.path.join(
+                os.path.pardir, "Windows-Driver-Developer-Supplemental-Tools", "src"
+            )
+            self.install_corepack(driver_corepack_path)
 
     def create_database(self, build_command, db_name, source_root, language):
         logging.info("Creating database")
@@ -70,6 +84,7 @@ class Scan:
                 build_command,
                 "--source-root",
                 source_root,
+                "--overwrite",
             ]
         )
 

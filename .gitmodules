@@ -1,0 +1,3 @@
+[submodule "Windows-Driver-Developer-Supplemental-Tools"]
+	path = Windows-Driver-Developer-Supplemental-Tools
+	url = https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools.git
