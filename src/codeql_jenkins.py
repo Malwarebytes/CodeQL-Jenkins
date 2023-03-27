@@ -62,9 +62,9 @@ class Scan:
         )
         logging.info("Using CodeQL from {}".format(self.codeql_path_executable))
         if "WINDOWS_DRIVER" in extra_corepacks:
-            driver_corepack_path = os.path.join(
+            driver_corepack_path = os.path.abspath(os.path.join(
                 "Windows-Driver-Developer-Supplemental-Tools", "src"
-            )
+            ))
             self.install_corepack(driver_corepack_path)
 
     def create_database(self, build_command, db_name, source_root, language):
