@@ -27,7 +27,6 @@ class Scan:
         if not os.path.exists(corepack_path):
             logging.error("Windows Driver Developer Supplemental Tools not found")
             logging.error("Please use git submodule update --init --recursive")
-            sys.exit(-1)
         subprocess.call([self.codeql_path_executable, "pack", "install", corepack_path])
         logging.info("Windows Driver Developer Supplemental Tools installed")
 
