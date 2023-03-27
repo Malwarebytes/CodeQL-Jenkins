@@ -63,7 +63,7 @@ class Scan:
         logging.info("Using CodeQL from {}".format(self.codeql_path_executable))
         if "WINDOWS_DRIVER" in extra_corepacks:
             driver_corepack_path = os.path.join(
-                os.path.pardir, "Windows-Driver-Developer-Supplemental-Tools", "src"
+                "Windows-Driver-Developer-Supplemental-Tools", "src"
             )
             self.install_corepack(driver_corepack_path)
 
