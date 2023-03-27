@@ -3,6 +3,7 @@ import sys
 import subprocess
 import os
 import tarfile
+import stat
 
 logging.getLogger().setLevel(level=logging.INFO)
 
@@ -56,6 +57,9 @@ class Scan:
         self.codeql_path_executable = os.path.abspath(
             os.path.join(codeql_path, "codeql.cmd")
         )
+        if not Scan.IS_WINDOWS:
+            st = os.stat(self.codeql_path_executable)
+            os.chmod(self.codeql_path_executable, st.st_mode | stat.S_IEXEC)
         logging.info("Using CodeQL from {}".format(self.codeql_path_executable))
         if "WINDOWS_DRIVER" in extra_corepacks:
             driver_corepack_path = os.path.abspath(os.path.join(__file__, "../../", "Windows-Driver-Developer-Supplemental-Tools", "src"))
