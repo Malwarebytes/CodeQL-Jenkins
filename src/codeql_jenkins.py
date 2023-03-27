@@ -9,7 +9,7 @@ logging.getLogger().setLevel(level=logging.INFO)
 
 class Scan:
     DEFAULT_PATH = os.path.expanduser("~")
-    PROGRAM_FILES = os.environ["ProgramFiles"]
+    PROGRAM_FILES = os.environ["ProgramFiles"] if 'Program Files' in os.environ  else DEFAULT_PATH
     IS_WINDOWS = os.name == "nt"
     THREADS = 8
     CODEQL_BUNDLE_URL = (
