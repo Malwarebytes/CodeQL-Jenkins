@@ -82,7 +82,7 @@ class Scan:
             ]
         )
 
-    def analyze_database(self, db_name, queries, sarif_output_name):
+    def analyze_database(self, db_name, queries, sarif_output_name, sarif_category="default"):
         logging.info("Analyzing database")
         subprocess.call(
             [
@@ -97,6 +97,8 @@ class Scan:
                 "--format=sarif-latest",
                 "--output",
                 sarif_output_name,
+                "--sarif-category",
+                sarif_category
             ]
         )
 
