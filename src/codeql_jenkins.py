@@ -113,27 +113,3 @@ def test():
     scan.create_database(build_command, db_name, source_root, language)
     scan.analyze_database(db_name, queries, sarif_output_name)
 
-if __name__ == "__main__":
-    print(sys.argv)
-    if len(sys.argv) != 7:
-        logging.error(
-            """Usage: codeql_jenkins.py "source_root" "build_command" "codeql_db_name" "language" "queries" "sarif-output" """
-        )
-        logging.info(
-            """Example: python codeql_jenkins.py "./app" "dotnet build" "codeql-db-app" "csharp" "codeql/csharp-queries" "codeql-results.sarif" """
-        )
-        sys.exit(-1)
-    (
-        _,
-        source_root,
-        build_command,
-        db_name,
-        language,
-        queries,
-        sarif_output_name,
-    ) = sys.argv
-    scan = Scan()
-    scan.retrieve_codeql()
-    scan.create_database(build_command, db_name, source_root, language)
-    scan.analyze_database(db_name, queries, sarif_output_name)
-    logging.info("Wrote sarif to {}".format(sarif_output_name))

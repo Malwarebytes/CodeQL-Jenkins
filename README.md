@@ -1,13 +1,23 @@
 # codeql_jenkins
  
-A helper python script to integrate CodeQL into Jenkins pipelines and output a sarif file.
+A helper python library to integrate CodeQL into Jenkins pipelines and output a sarif file.
 
-The script can download CodeQL if it's not found. By default it looks for codeql `./codeql`, `~/codeql` and `C:/Program Files/codeql`. It runs on both Python 2.7 and 3.x.
+The library can download CodeQL if it's not found. By default it looks for codeql `./codeql`, `~/codeql` and `C:/Program Files/codeql`. It runs on both Python 2.7 and 3.x.
 
 For example, for a sample C# app located in `C:/app`:
 
-```powershell
-python codeql_jenkins.py "C:/app" "dotnet clean && dotnet build" "codeql-db-app" "csharp" "codeql/csharp-queries" "codeql-results.sarif" 
+```python
+from codeql_jenkins import Scan
+source_root = "./app"
+build_command = "dotnet clean && dotnet build"
+db_name = "codeql-db"
+language = "csharp"
+queries = "codeql/csharp"
+sarif_output_name = "codeql-results.sarif"
+scan = Scan()
+scan.retrieve_codeql()
+scan.create_database(build_command, db_name, source_root, language)
+scan.analyze_database(db_name, queries, sarif_output_name)
 ```
 
 ```
