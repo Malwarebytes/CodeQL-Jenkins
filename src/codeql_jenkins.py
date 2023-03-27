@@ -27,6 +27,7 @@ class Scan:
         if not os.path.exists(corepack_path):
             logging.error("Windows Driver Developer Supplemental Tools not found")
             logging.error("Please use git submodule update --init --recursive")
+            sys.exit(-1)
         subprocess.call([self.codeql_path_executable, "pack", "install", corepack_path])
         logging.info("Windows Driver Developer Supplemental Tools installed")
 
@@ -61,9 +62,9 @@ class Scan:
         )
         logging.info("Using CodeQL from {}".format(self.codeql_path_executable))
         if "WINDOWS_DRIVER" in extra_corepacks:
-            driver_corepack_path = os.path.abspath(os.path.join(
-                "Windows-Driver-Developer-Supplemental-Tools", "src"
-            ))
+            driver_corepack_path = os.path.join(__file__,
+                os.path.pardir, "Windows-Driver-Developer-Supplemental-Tools", "src"
+            )
             self.install_corepack(driver_corepack_path)
 
     def create_database(self, build_command, db_name, source_root, language):
