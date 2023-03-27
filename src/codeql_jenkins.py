@@ -55,7 +55,7 @@ class Scan:
                 tar.extractall()
             codeql_path = self.DEFAULT_CODEQL_PATH
         self.codeql_path_executable = os.path.abspath(
-            os.path.join(codeql_path, "codeql.cmd" if Scan.IS_WINDOWS else "codeql.sh")
+            os.path.join(codeql_path, "codeql.cmd" if Scan.IS_WINDOWS else "codeql")
         )
         if not Scan.IS_WINDOWS:
             st = os.stat(self.codeql_path_executable)
