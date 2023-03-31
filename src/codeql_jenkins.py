@@ -83,6 +83,8 @@ class Scan:
                 "--source-root",
                 source_root,
                 "--overwrite",
+                "--extractor-options-file",
+                os.path.abspath(os.path.join(__file__, "../../", "extractor_options.json"))
             ]
         )
 
