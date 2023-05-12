@@ -1,4 +1,6 @@
 # codeql_jenkins
+
+[![CodeQL](https://github.com/Malwarebytes/Codeql-jenkins/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Malwarebytes/Codeql-jenkins/actions/workflows/github-code-scanning/codeql)
  
 A helper python library to integrate CodeQL into Jenkins pipelines and output a sarif file.
 
