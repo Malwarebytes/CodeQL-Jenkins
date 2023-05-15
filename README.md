@@ -1,5 +1,7 @@
 # codeql_jenkins
  
+[![CodeQL](https://github.com/Malwarebytes/Codeql-jenkins/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Malwarebytes/Codeql-jenkins/actions/workflows/github-code-scanning/codeql)
+
 A helper python library to integrate CodeQL into Jenkins pipelines and output a sarif file.
 
 The library can download CodeQL if it's not found. By default it looks for codeql `./codeql`, `~/codeql` and `C:/Program Files/codeql`. It runs on both Python 2.7 and 3.x.
